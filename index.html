@@ -26,21 +26,26 @@
             fetch(baseUrl + apikey.key)
                 .then((response) => {
                     if(!response.ok) throw new Error('Erro ao executar a requisição, status ' + response.status);
-       
                     return response.json();
                 })
                 .then((api) => {
                     let texto = "";
                     let quantidadeMoedas = 10;
                 
-                    // Get 10 coins and symbols 
                     for(let i = 0; i < quantidadeMoedas; i++){
                         texto = texto + `                        
-                            <div class="media">
-                                <img src="coin.jpg" class="align-self-center mr-3" alt="coin" width="100" height="60">
-                                <div class="media-body">
-                                <h5 class="mt-2">${api.data[i].name}</h5>
-                                <p>${api.data[i].symbol}</p>
+                            <div class="card w-75 mb-4">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="coin.jpg" class="card-img" alt="coin">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${api.data[i].name}</h5>
+                                            <p class="card-subtitle text-muted mb-4">${api.data[i].symbol}</p>
+                                            <p class="card-text"><small class="text-muted">Primeira data histórica: ${new Date(api.data[i].first_historical_data).toLocaleDateString()}</small></p> 
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         `;
